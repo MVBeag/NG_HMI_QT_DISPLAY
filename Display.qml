@@ -7,6 +7,7 @@ Item {
 
     property string textEnery: textAreaInput.text
     property int powerAperture: 1
+    property string stringTest: "NikeTamere"
 
     Rectangle {
         id: background
@@ -25,7 +26,6 @@ Item {
 
         Text {
             id: name
-            text: powerAperture
             objectName: "myenergy"
             anchors.centerIn: energyframe
         }
@@ -44,8 +44,8 @@ Item {
                 anchors.centerIn: parent
                 MouseArea {
                 anchors.fill: parent
-                onPressed: parent.color = "Red"
-                onReleased: powerAperture + 1
+                onPressed: parent.color = "blue"
+                onReleased: powerAperture = powerAperture + 1
                 }
             }
 
@@ -65,9 +65,23 @@ Item {
                 text: "Energy"
                 anchors.centerIn: textArea
 
-
             }
 
+        }
+
+        Rectangle {
+            id: justATest
+            anchors.left: energyframe.right
+            anchors.top: textArea.bottom
+            width: 50; height: 50
+            color: "yellow"
+            radius: 4
+            border.color: "blue"
+            Text{
+                id: justATestText
+                text: stringTest
+                anchors.centerIn: justATest
+            }
         }
 
     }

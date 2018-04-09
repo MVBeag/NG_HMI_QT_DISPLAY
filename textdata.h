@@ -18,6 +18,7 @@ public slots:
     void updateValue(QString m_updateValue);
 private:
     QObject *m_text;
+    QObject *m_aperture;
     float m_val{0.0f};
     QString m_ttext;
     bool m_increase{true};

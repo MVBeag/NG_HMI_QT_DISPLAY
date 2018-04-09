@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
     */
     QObject *object = view.rootObject();
     QObject *energy = object->findChild<QObject*>("myenergy"); /*la recherche dans qml*/
+    /*<QObject*>: signification ...*/
 
 #if 0
     QGuiApplication app(argc, argv);
@@ -182,9 +183,6 @@ int main(int argc, char *argv[])
         QObject::connect(&serialPortReader, SIGNAL(newValueReady(QString)),ttext , SLOT(updateValue(QString)));
     }
 /***********COM************/
-
-
-
 
     /*sans cela il ne cherche pas à lire ni même à lancer le code lié au COM*/
     /*l'affichage est pas bon*/

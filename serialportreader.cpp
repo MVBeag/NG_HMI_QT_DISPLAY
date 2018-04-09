@@ -69,7 +69,7 @@ SerialPortReader::SerialPortReader(QSerialPort *serialPort, QObject *parent)
     /*affiche les valeurs*/
     connect(&m_timer, &QTimer::timeout, this, &SerialPortReader::handleTimeout);
 
-    m_timer.start(5000); /*Temps d'enregistrement*/
+    m_timer.start(50); /*Temps d'enregistrement*/
 }
 
 SerialPortReader::~SerialPortReader()
@@ -85,7 +85,7 @@ void SerialPortReader::handleReadyRead()
     m_readData = m_serialPort->readAll(); /*m_readData est un attribut*/
 
     if (!m_timer.isActive())
-        m_timer.start(5000);
+        m_timer.start(50);
 }
 
 void SerialPortReader::handleTimeout()
