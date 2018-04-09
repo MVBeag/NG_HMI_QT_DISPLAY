@@ -80,8 +80,9 @@ void SerialPortReader::handleReadyRead()
 {
     /*readAll: read data from the device*/
     /*append ajoute les chaînes*/
-
-    m_readData.append(m_serialPort->readAll());
+    m_serialPort->setReadBufferSize(1);
+    qDebug() << "Buffer Size " << m_serialPort->readBufferSize();
+    m_readData = m_serialPort->readAll(); /*m_readData est un attribut*/
 
     if (!m_timer.isActive())
         m_timer.start(5000);
