@@ -99,7 +99,7 @@ void SerialPortReader::handleTimeout()
         emit newValueReady(m_ttext);
     }
 
-    QCoreApplication::quit();
+    //QCoreApplication::quit();
 }
 
 void SerialPortReader::handleError(QSerialPort::SerialPortError serialPortError)

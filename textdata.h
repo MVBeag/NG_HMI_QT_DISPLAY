@@ -25,7 +25,7 @@ private:
 
 
 inline void TextData::updateValue(QString newValue){
-    m_text->setProperty("text", "cocoDasVegas");
+    m_text->setProperty("text", newValue);
 }
 
 

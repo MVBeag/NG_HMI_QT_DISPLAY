@@ -82,8 +82,6 @@ the next setp is the read the Data from USB and to read or to toggler something
 
 int main(int argc, char *argv[])
 {
-
-
     /* QML application */
     /*fermer le terminale ferme le qml*/
     QGuiApplication app(argc, argv);
@@ -92,14 +90,14 @@ int main(int argc, char *argv[])
     view.show();
     /**/
 
-    /*c'est un peu le même principe qu'avec serial, dans serial on créer un objet dans la classe de base
+    /*
+    C'est un peu le même principe qu'avec serial, dans serial on créer un objet dans la classe de base
     QSerialport et à l'aide du référencement on utilise cet objet dans la classe SerialPortReader.
     Ici on créer un pointer sur "myenergy" puis à l'aide du constructeur de ma classe TextData on prend "myenergy" comme
     référence pour la création de mon objet ttext.
     */
     QObject *object = view.rootObject();
     QObject *energy = object->findChild<QObject*>("myenergy"); /*la recherche dans qml*/
-
 
 #if 0
     QGuiApplication app(argc, argv);
@@ -162,7 +160,7 @@ int main(int argc, char *argv[])
 
     /* Port conf */
     QSerialPort serialPort; /*creation de l'objet*/
-    QString serialPortName = "ttyACM1";//argumentList.at(1);
+    QString serialPortName = "ttyACM0";//argumentList.at(1);
     serialPort.setPortName(serialPortName);
     int serialPortBaudRate = QSerialPort::Baud115200;//(argumentCount > 2) ? argumentList.at(2).toInt() : QSerialPort::Baud115200;
     serialPort.setBaudRate(serialPortBaudRate);
