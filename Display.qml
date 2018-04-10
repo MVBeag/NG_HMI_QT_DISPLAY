@@ -48,7 +48,6 @@ Item {
                 onReleased: powerAperture = powerAperture + 1
                 }
             }
-
         }
 
         Rectangle {
@@ -64,9 +63,7 @@ Item {
                 id: textAreaInput
                 text: "Energy"
                 anchors.centerIn: textArea
-
             }
-
         }
 
         Rectangle {
@@ -83,8 +80,5 @@ Item {
                 anchors.centerIn: justATest
             }
         }
-
     }
-
-
 }

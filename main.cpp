@@ -97,55 +97,7 @@ int main(int argc, char *argv[])
     référence pour la création de mon objet ttext.
     */
     QObject *object = view.rootObject();
-    QObject *energy = object->findChild<QObject*>("myenergy"); /*la recherche dans qml*/
-    /*<QObject*>: signification ...*/
-
-#if 0
-    QGuiApplication app(argc, argv);
-
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/Display.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
-//    QTimer::singleShot is used together with a Lambda do find out how to access the dial "myDial"
-//    QTimer::singleShot(1000, [&engine]{    qDebug() << engine.rootObjects()[0]->findChild<QObject *>("myDial"); });
-
-    //QObject *dial = engine.rootObjects()[0]->findChild<QObject *>("myDial");
-    QObject *text = engine.rootObjects()[0]->findChild<QObject *>("myenergy");
-    if(text){
-        // make objects dynamic, otherwise they are destroyed after the code block :-)
-        //DialData *ddata = new DialData(dial, nullptr);
-        TextData *ttext = new TextData(text, nullptr);
-
-        QTimer *timer = new QTimer();
-        //QObject::connect(timer, SIGNAL(timeout()), ddata, SLOT(updateValue()));
-        QObject::connect(timer, SIGNAL(timeout()), ttext, SLOT(updateValue()));
-        timer->start(50);
-    }
-#endif
-
-#if 0
-    QObject *object = view.rootObject();
-    QObject *energy = object->findChild<QObject*>("myenergy");
-    if (energy)
-    {
-        energy->setProperty("text", "2");
-
-    }
-    /* Quick test to look how to chqnge informations in QML */
-#endif
-
-
-    #if 0
-    QObject *object = view.rootObject();
-    QObject *rect = object->findChild<QObject*>("rect");
-    if (rect)
-        rect->setProperty("color", "red");
-    QObject *energy = object->findChild<QObject*>("energy");
-    if (energy)
-        energy->setProperty("text", "1");
-    #endif
+    QObject *energy = object->findChild<QObject*>("myenergy"); /*Return the Child of the Object*/
 
 /***********COM************/
 /*dans ce sens l'affichage du QML le fonctionne pas bien*/
@@ -176,12 +128,15 @@ int main(int argc, char *argv[])
     /*création de l'objet serialPortReader en appelant le constructeur*/
     SerialPortReader serialPortReader(&serialPort); /* Class SerialPortReader, object seiralPortReader*/
 
+    qDebug() << "Property value stringTest:" << object->property("stringTest").toString();
+
 
     if (energy)
     {
         TextData *ttext = new TextData(energy, nullptr); /*le constructeur, définition du pointeur avec * */
         QObject::connect(&serialPortReader, SIGNAL(newValueReady(QString)),ttext , SLOT(updateValue(QString)));
     }
+
 /***********COM************/
 
     /*sans cela il ne cherche pas à lire ni même à lancer le code lié au COM*/

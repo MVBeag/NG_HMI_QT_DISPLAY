@@ -60,7 +60,6 @@ SerialPortReader::SerialPortReader(QSerialPort *serialPort, QObject *parent)
     , m_serialPort(serialPort)
     , m_standardOutput(stdout)
 {
-
     /*sender,signal - receiver,methond*/
     connect(m_serialPort, &QSerialPort::readyRead, this, &SerialPortReader::handleReadyRead);
     /**/
@@ -99,8 +98,6 @@ void SerialPortReader::handleTimeout()
         qDebug() << "m_ttext " << m_ttext;
         emit newValueReady(m_ttext);
     }
-
-    //QCoreApplication::quit();
 }
 
 void SerialPortReader::handleError(QSerialPort::SerialPortError serialPortError)
