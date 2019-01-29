@@ -1,9 +1,5 @@
-QT = core
-QT += \
-    serialport \
-    quick
+QT += core quick qml serialport
 
-#CONFIG += console
 CONFIG -= app_bundle
 
 TARGET = creaderasync
@@ -11,15 +7,17 @@ TEMPLATE = app
 
 HEADERS += \
     serialportreader.h \
-    textdata.h
+    textdata.h \
+    serialportwriter.h
 
 SOURCES += \
     main.cpp \
     serialportreader.cpp \
-    textdata.cpp
+    textdata.cpp \
+    serialportwriter.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/serialport/creaderasync
 INSTALLS += target
 
-DISTFILES += \
-    Display.qml
+RESOURCES += \
+    qmake_qmake_immediate.qrc

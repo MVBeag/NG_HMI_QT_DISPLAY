@@ -13,3 +13,38 @@ QMAKE_DEFAULT_LIBDIRS = \
     /usr/lib \
     /lib/x86_64-linux-gnu \
     /lib
+QMAKE_CXX.INCDIRS = \
+    /usr/include/c++/4.8 \
+    /usr/include/x86_64-linux-gnu/c++/4.8 \
+    /usr/include/c++/4.8/backward \
+    /usr/lib/gcc/x86_64-linux-gnu/4.8/include \
+    /usr/local/include \
+    /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed \
+    /usr/include/x86_64-linux-gnu \
+    /usr/include \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/include/c++/7.3.0 \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/include/c++/7.3.0/arm-dey-linux-gnueabi \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/include/c++/7.3.0/backward \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/x86_64-deysdk-linux/usr/lib/arm-dey-linux-gnueabi/gcc/arm-dey-linux-gnueabi/7.3.0/include \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/lib/gcc/arm-dey-linux-gnueabi/7.3.0/include \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/x86_64-deysdk-linux/usr/lib/arm-dey-linux-gnueabi/gcc/arm-dey-linux-gnueabi/7.3.0/include-fixed \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/include
+QMAKE_CXX.LIBDIRS = \
+    /usr/lib/gcc/x86_64-linux-gnu/4.8 \
+    /usr/lib/x86_64-linux-gnu \
+    /usr/lib \
+    /lib/x86_64-linux-gnu \
+    /lib \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/x86_64-deysdk-linux/usr/lib/arm-dey-linux-gnueabi/gcc/arm-dey-linux-gnueabi/7.3.0 \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/lib \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/lib/arm-dey-linux-gnueabi/7.3.0 \
+    /home/ubgel200/NG2018/dey/2.4-r2/ccimx6ulsbc/dey-image-qt-fb/sysroots/cortexa7hf-neon-dey-linux-gnueabi/usr/lib
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION

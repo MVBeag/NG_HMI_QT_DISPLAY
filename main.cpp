@@ -50,10 +50,9 @@
 
 
 #include "serialportreader.h"
+#include "serialportwriter.h"
 #include "textdata.h"
-
 #include <QtSerialPort/QSerialPort>
-
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QFile>
@@ -69,79 +68,42 @@
 
 QT_USE_NAMESPACE
 
-/*
-ubgel200@ubgel200-laptop:~/workspace/QT/creaderasync$ sudo ./creaderasync
-Data successfully received from port ttyACM1
-iiiiidddDdddddD
-
-it also work with QT but before:
-ubgel200@ubgel200-laptop:/dev$ sudo chmod 666 ttyACM1
-
-the next setp is the read the Data from USB and to read or to toggler something
-*/
-
 int main(int argc, char *argv[])
 {
-    /* QML application */
-    /*fermer le terminale ferme le qml*/
     QGuiApplication app(argc, argv);
     QQuickView view;
-    view.setSource(QUrl("Display.qml"));
+    view.setSource(QUrl("qrc:/Display.qml"));
     view.show();
-    /**/
 
-    /*
-    C'est un peu le même principe qu'avec serial, dans serial on créer un objet dans la classe de base
-    QSerialport et à l'aide du référencement on utilise cet objet dans la classe SerialPortReader.
-    Ici on créer un pointer sur "myenergy" puis à l'aide du constructeur de ma classe TextData on prend "myenergy" comme
-    référence pour la création de mon objet ttext.
-    */
     QObject *object = view.rootObject();
     QObject *energy = object->findChild<QObject*>("myenergy"); /*Return the Child of the Object*/
 
-/***********COM************/
-/*dans ce sens l'affichage du QML le fonctionne pas bien*/
-    /*sans cela il ne cherche pas à lire ni même à lancer le code lié au COM*/
-    //QCoreApplication coreApplication(argc, argv);
-/*
-    int argumentCount = QCoreApplication::arguments().size();
-    QStringList argumentList = QCoreApplication::arguments();
-*/
-
-    /* With the Terminal for the error message */
+    /* To display message on the terminal */
     QTextStream standardOutput(stdout); /*interface to write text*/
 
-    /* Port conf */
-    QSerialPort serialPort; /*creation de l'objet*/
-    QString serialPortName = "ttyACM0";//argumentList.at(1);
+    /* Port configuration */
+    QSerialPort serialPort;
+    QString serialPortName = "/dev/ttymxc1";
     serialPort.setPortName(serialPortName);
-    int serialPortBaudRate = QSerialPort::Baud115200;//(argumentCount > 2) ? argumentList.at(2).toInt() : QSerialPort::Baud115200;
+    int serialPortBaudRate = QSerialPort::Baud115200;
     serialPort.setBaudRate(serialPortBaudRate);
-    if (!serialPort.open(QIODevice::ReadOnly)) {
-        standardOutput << QObject::tr("Failed to open port %1, error: %2").arg(serialPortName).arg(serialPort.errorString()) << endl;
-        return 1;
-    }
 
-    /* Ok a crée un objet de type QSerialPort et là on prend ça référence pour crée un objet
-    dans SerialPortReader, le but étant de manipulant seriaPort avec les methode de SerialPortReader
-    */
-    /*création de l'objet serialPortReader en appelant le constructeur*/
-    SerialPortReader serialPortReader(&serialPort); /* Class SerialPortReader, object seiralPortReader*/
 
-    qDebug() << "Property value stringTest:" << object->property("stringTest").toString();
 
+    serialPort.open(QIODevice::WriteOnly);
+
+    SerialPortWriter serialPortWriter(&serialPort);
+    const char t_data[] = {0xa5,0x05,0x00,0x00,0x10,0x18,0xff,0xd7,'I'};
+    view.rootContext()->setContextProperty("myserialPortWriter", &serialPortWriter);
+    view.rootContext()->setContextProperty("myt_data", &t_data);
+    serialPortWriter.write(t_data, 9);
+    
 
     if (energy)
     {
-        TextData *ttext = new TextData(energy, nullptr); /*le constructeur, définition du pointeur avec * */
-        QObject::connect(&serialPortReader, SIGNAL(newValueReady(QString)),ttext , SLOT(updateValue(QString)));
+        TextData *ttext = new TextData(energy, nullptr);
+        //QObject::connect(&serialPortReader, SIGNAL(newValueReady(QString)),ttext , SLOT(updateValue(QString)));
     }
 
-/***********COM************/
-
-    /*sans cela il ne cherche pas à lire ni même à lancer le code lié au COM*/
-    /*l'affichage est pas bon*/
-    //return coreApplication.exec();
     return app.exec();
-
 }

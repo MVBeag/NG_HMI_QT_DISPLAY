@@ -1,84 +1,34 @@
-import QtQuick 2.0
+import QtQuick 2.9
+import QtQuick.Window 2.2
+import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
-Item {
-
-    width: 400;
-    height: 400;
-
-    property string textEnery: textAreaInput.text
-    property int powerAperture: 1
-    property string stringTest: "NikeTamere"
+Window {
+    id: mainWindows
+    visible: true
+    width: 640
+    height: 480
 
     Rectangle {
-        id: background
+        id: test
         anchors.fill: parent
-        color: "white"
-        objectName: "rect"
-
-        Rectangle {
-            id: energyframe
-            x: 50; y: 50;
-            width: 200; height: 300
-            color: "red"
-            radius: 4
-            border.color: "blue"
-        }
-
+        color: "#60C4E4"
+        border.color: "#20283F"
         Text {
             id: name
-            objectName: "myenergy"
-            anchors.centerIn: energyframe
+            text: "Test"
+            anchors.centerIn: parent
+            font.family: "Calibri Light"
+            font.pixelSize: 85
+            color: "white"
         }
-
-        Rectangle {
-            id: incrEnergyFrame
-            anchors.left: energyframe.right
-            anchors.top: energyframe.top
-            width: 50; height: 50
-            color: "magenta"
-            radius: 4
-            border.color: "blue"
-
-            Text {
-                text: qsTr("Inc")
-                anchors.centerIn: parent
-                MouseArea {
-                anchors.fill: parent
-                onPressed: parent.color = "blue"
-                onReleased: powerAperture = powerAperture + 1
-                }
+        MouseArea{
+            anchors.fill: parent
+            onPressed: {
+                myserialPortWriter.writeTest();
+                test.color = "#20283F";
             }
-        }
-
-        Rectangle {
-            id: textArea
-            anchors.left: energyframe.right
-            anchors.top: incrEnergyFrame.bottom
-            width: 50; height: 50
-            color: "green"
-            radius: 4
-            border.color: "blue"
-
-            TextInput {
-                id: textAreaInput
-                text: "Energy"
-                anchors.centerIn: textArea
-            }
-        }
-
-        Rectangle {
-            id: justATest
-            anchors.left: energyframe.right
-            anchors.top: textArea.bottom
-            width: 50; height: 50
-            color: "yellow"
-            radius: 4
-            border.color: "blue"
-            Text{
-                id: justATestText
-                text: stringTest
-                anchors.centerIn: justATest
-            }
+            onReleased: parent.color = "#60C4E4"
         }
     }
 }
