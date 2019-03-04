@@ -66,6 +66,17 @@
 #include <QTimer>
 #include <QString>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+#include "Protocole_LE/lib/mem/ucBuffer.h"
+#include "Protocole_LE/lib/prot/protocol.h"
+#include "Protocole_LE/lib/prot/services/generator.h"
+#ifdef __cplusplus
+}
+#endif
+
 QT_USE_NAMESPACE
 
 int main(int argc, char *argv[])
@@ -88,7 +99,17 @@ int main(int argc, char *argv[])
     int serialPortBaudRate = QSerialPort::Baud115200;
     serialPort.setBaudRate(serialPortBaudRate);
 
+    /*add protocole*/
+    uint8_t bufMem[256];
+    struct ucBuffer buf;
+    buf.buf = bufMem;
+    buf.size=256;
 
+    struct protocol prot;
+    prot.procLayer.sid = PROT_SID(SID_DEV_GEN, SID_SERV_GEN_TEST_FLASH, SID_REQ);
+    prot.netLayer.nid = 0;
+    prot.tranLayer.tid = 0;
+    prot_encode(&prot,&buf);
 
     serialPort.open(QIODevice::WriteOnly);
 
@@ -101,7 +122,7 @@ int main(int argc, char *argv[])
 
     if (energy)
     {
-        TextData *ttext = new TextData(energy, nullptr);
+        //TextData *ttext = new TextData(energy, nullptr);
         //QObject::connect(&serialPortReader, SIGNAL(newValueReady(QString)),ttext , SLOT(updateValue(QString)));
     }
 
